@@ -1,0 +1,21 @@
+<!-- ask.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ask your Document</title>
+</head>
+<body>
+    <div id="chat-window">
+        <div id="chat-messages"></div>
+        <input type="text" id="user-message" />
+        <button onclick="sendMessage()">Send</button>
+    </div>
+    <script>
+        function sendMessage() {
+            var message = document.getElementById('user-message').value;
+            // Implement logic to send message to server (e.g., using AJAX)
+            // Display sent message in chat window
+        }
+    </script>
+</body>
+</html>
