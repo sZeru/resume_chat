@@ -12,6 +12,7 @@ Hackathon project for CMPE 172, Spring 2024.
 - pip install llama-index-embeddings-huggingface
 - python -m pip install pika --upgrade
 - npm install amqplib
+- pip install flask-socketio
 
 ### Install [Ollama](https://github.com/ollama/ollama) using your respective system
 

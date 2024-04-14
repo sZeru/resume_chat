@@ -1,23 +1,27 @@
 import pika
-import signal
-import sys
 from test import *
 
-connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
+connection = pika.BlockingConnection(
+    pika.ConnectionParameters(host='localhost'))
+
 channel = connection.channel()
-count = 0
 
-def callback(ch, method, properties, body):
-     global count
-     count += 1
-     print(" [x] Received %r" % body)
-     query(str(body))
+channel.queue_declare(queue='rpc_queue')
 
-def signal_handler(sig, frame):
-    print("\nMessages received:", count)
-    sys.exit(0)
 
-signal.signal(signal.SIGINT, signal_handler)
-channel.basic_consume(queue='rag1',auto_ack=True,on_message_callback=callback)
-print(' [*] Waiting for messages. To exit press CTRL+C\n')
+def on_request(ch, method, props, body):
+    print(f" [X] Querying ({body})...")
+    response = query(str(body))
+    print(f" [X] which is:({response})")
+    ch.basic_publish(exchange='',
+                     routing_key=props.reply_to,
+                     properties=pika.BasicProperties(correlation_id = \
+                                                         props.correlation_id),
+                     body=str(response))
+    ch.basic_ack(delivery_tag=method.delivery_tag)
+
+channel.basic_qos(prefetch_count=1)
+channel.basic_consume(queue='rpc_queue', on_message_callback=on_request)
+
+print(" [x] Awaiting RPC requests")
 channel.start_consuming()
