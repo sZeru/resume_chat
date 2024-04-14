@@ -23,5 +23,4 @@ def query(string):
 
     query_engine = index.as_query_engine()
     response = query_engine.query(string)
-    # You can change this to 'return response' and then use the output of query() somewhere else
-    print(response)
+    return response
