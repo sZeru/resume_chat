@@ -72,6 +72,7 @@ def send_message():
     message = request.json.get('message')
 
     response = send_rpc_request(message)
+    
     print(response.decode('utf-8'))
     return jsonify({'response': response.decode('utf-8')})
 
