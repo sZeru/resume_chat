@@ -1,6 +1,7 @@
 import pika
 import signal
 import sys
+from test import *
 
 connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
 channel = connection.channel()
@@ -10,6 +11,7 @@ def callback(ch, method, properties, body):
      global count
      count += 1
      print(" [x] Received %r" % body)
+     query(str(body))
 
 def signal_handler(sig, frame):
     print("\nMessages received:", count)

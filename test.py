@@ -7,19 +7,21 @@ from llama_index.llms.ollama import Ollama
 #resp = gemma2b.complete("what are michael jordan's accolades")
 #print(resp)
 
+def query(string):
 
-# This is with context
-reader = SimpleDirectoryReader(input_files=["./data/SOFI-2023.pdf/"])
-documents = reader.load_data()
+    # This is with context
+    reader = SimpleDirectoryReader(input_files=["./data/SOFI-2023.pdf/"])
+    documents = reader.load_data()
 
-Settings.embed_model = resolve_embed_model("local:BAAI/bge-small-en-v1.5")
+    Settings.embed_model = resolve_embed_model("local:BAAI/bge-small-en-v1.5")
 
-Settings.llm = Ollama(model="mistral", request_timeout=30.0)
+    Settings.llm = Ollama(model="mistral", request_timeout=30.0)
 
-index = VectorStoreIndex.from_documents(
-    documents,
-)
+    index = VectorStoreIndex.from_documents(
+        documents,
+    )
 
-query_engine = index.as_query_engine()
-response = query_engine.query("Explain increase prices impact on food security")
-print(response)
+    query_engine = index.as_query_engine()
+    response = query_engine.query(string)
+    # You can change this to 'return response' and then use the output of query() somewhere else
+    print(response)
