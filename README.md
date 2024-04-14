@@ -17,8 +17,13 @@ Hackathon project for CMPE 172, Spring 2024.
 - npm install amqplib
 - pip install flask-socketio
 
-### Install [Ollama](https://github.com/ollama/ollama) using your respective system
+### Install the following programs
+- Ollama (https://github.com/ollama/ollama). Afterwards, run 'ollama pull mistral` in the terminal
+- RabbitMQ (https://www.rabbitmq.com/).
 
-### After installing, run `ollama pull mistral` in the terminal
-
-### Code should be good to run
+### To run the program
+- open Ollama
+- start the RabbitMQ service
+- run app.py
+- run backend.py
+- Access the website on your local address (http://127.0.0.1:5000)
