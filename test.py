@@ -10,7 +10,7 @@ from llama_index.llms.ollama import Ollama
 def query(string):
 
     # This is with context
-    reader = SimpleDirectoryReader(input_files=["./data/SOFI-2023.pdf/"])
+    reader = SimpleDirectoryReader(input_files=["./data/SOFI-2023.pdf"])
     documents = reader.load_data()
 
     Settings.embed_model = resolve_embed_model("local:BAAI/bge-small-en-v1.5")

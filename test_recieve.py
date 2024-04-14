@@ -1,4 +1,5 @@
 import pika
+from test import *
 
 connection = pika.BlockingConnection(
     pika.ConnectionParameters(host='localhost'))
@@ -7,18 +8,16 @@ channel = connection.channel()
 
 channel.queue_declare(queue='rpc_queue')
 
-def double(string):
-    return str(string)+"response"
 
 def on_request(ch, method, props, body):
-    print(f" [.] doubled({body})")
-    response = double(body)
-    print(f" [.] which is:({response})")
+    print(f" [X] Querying ({body})...")
+    response = query(str(body))
+    print(f" [X] which is:({response})")
     ch.basic_publish(exchange='',
                      routing_key=props.reply_to,
                      properties=pika.BasicProperties(correlation_id = \
                                                          props.correlation_id),
-                     body=response)
+                     body=str(response))
     ch.basic_ack(delivery_tag=method.delivery_tag)
 
 channel.basic_qos(prefetch_count=1)

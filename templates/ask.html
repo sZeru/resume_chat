@@ -59,14 +59,25 @@
 <body>
     <div id="chat-window">
         <div id="chat-messages"></div>
-        <input type="text" id="user-message" />
+        <input type="text" id="user-message" onkeydown="handleKeyDown(event)" />
         <button onclick="sendMessage()">Send</button>
     </div>
     <script>
+        function handleKeyDown(event) {
+            if (event.keyCode === 13) {
+                event.preventDefault(); // Prevent default behavior (e.g., newline in textarea)
+                sendMessage(); // Call sendMessage() when Enter key is pressed
+            }
+        }
+
+        // function to send message from page
         function sendMessage() {
             var message = document.getElementById('user-message').value;
             console.log('Message:', message);
-
+    
+            // Append user's message to chat window
+            appendToChat('You: ' + message);
+    
             // Send message to server-side endpoint
             fetch('/send_message', {
                 method: 'POST',
@@ -77,12 +88,28 @@
             }).then(response => {
                 if (response.ok) {
                     console.log('Message sent successfully');
+                    return response.json(); // Parse response JSON
                 } else {
                     console.error('Failed to send message');
+                    throw new Error('Failed to send message');
                 }
+            }).then(data => {
+                console.log('Response:', data.response);
+                // Append server's response to chat window
+                appendToChat('Server: ' + data.response);
             }).catch(error => {
                 console.error('Error sending message:', error);
             });
+    
+            // Clear input field
+            document.getElementById('user-message').value = '';
+        }
+    
+        function appendToChat(message) {
+            var chatMessages = document.getElementById('chat-messages');
+            var messageElement = document.createElement('div');
+            messageElement.textContent = message;
+            chatMessages.appendChild(messageElement);
         }
     </script>
 </body>
