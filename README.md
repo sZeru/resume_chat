@@ -6,6 +6,6 @@ Hackathon project for CMPE 172, Spring 2024.
 - pip install llama-index-llms-ollama
 - pip install llama-index-embeddings-huggingface
 
-### After installing, run `ollama pull gemma:2b` in the terminal
+### After installing, run `ollama pull mistral` in the terminal
 
 ### Code should be good to run
