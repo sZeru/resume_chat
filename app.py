@@ -48,6 +48,7 @@ class RpcClient(object):
             self.connection.process_data_events(time_limit=None)
         return self.response
 
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app)
@@ -75,6 +76,18 @@ def send_message():
     
     print(response.decode('utf-8'))
     return jsonify({'response': response.decode('utf-8')})
+
+@app.route('/upload', methods=['POST'])
+def upload():
+    if 'file' not in request.files:
+        return "No file part"
+    file = request.files['file']
+    if file.filename == '':
+        return "No selected file"
+
+    # Saving the file to server for now.
+    file.save("./data/resume")
+    return file
 
 def send_rpc_request(message):
     response = client.call(message)
