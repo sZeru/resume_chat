@@ -1,5 +1,5 @@
 import pika
-from rag import *
+from rag import query
 
 connection = pika.BlockingConnection(
     pika.ConnectionParameters(host='localhost'))
