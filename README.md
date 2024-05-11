@@ -1,6 +1,7 @@
-# rag_hackathon
+# resume_chat
 
-Hackathon project for CMPE 172, Spring 2024.
+Final project for CMPE 172, Spring 2024.
+Tool for users to get feedback on their resume using a RAG assisted LLM.
 
 ## Dependencies
 - Python
