@@ -1,27 +1,56 @@
-from llama_index.legacy import VectorStoreIndex, SimpleDirectoryReader
+import chromadb
+from llama_index.legacy import VectorStoreIndex, SimpleDirectoryReader, ServiceContext
 from llama_index.core.settings import Settings
 from llama_index.legacy.embeddings import resolve_embed_model
+from llama_index.legacy.vector_stores.chroma import ChromaVectorStore
+from llama_index.embeddings.huggingface import HuggingFaceEmbedding
+from llama_index.core import StorageContext, PromptTemplate
+from llama_index.llms.huggingface import HuggingFaceLLM
 from llama_index.llms.ollama import Ollama
+from pypdf import PdfReader
 
-# This is without context
-#gemma2b = Ollama(model="gemma:2b", request_timeout=30.0)
-#resp = gemma2b.complete("what are michael jordan's accolades")
-#print(resp)
 
-def query(string):
+#Settings.embed_model = resolve_embed_model("local:BAAI/bge-small-en-v1.5")
 
-    # This is with context
-    reader = SimpleDirectoryReader(input_files=["./data/SOFI-2023.pdf"])
-    documents = reader.load_data()
+#Settings.llm = Ollama(model="mistral", request_timeout=30.0)
+
+Settings.embed_model = HuggingFaceEmbedding("BAAI/bge-small-en-v1.5")
+
+Settings.llm = Ollama(model="mistral", request_timeout=30.0)
+
+# load documents
+reader = SimpleDirectoryReader("./data")
+documents = reader.load_data()
+
+# initialize client, setting path to save data
+db = chromadb.PersistentClient(path="./chroma_db")
+
+# get collection
+chroma_collection = db.get_or_create_collection("quickstart")
+
+# assign chroma as the vector_store to the context
+vector_store = ChromaVectorStore(chroma_collection=chroma_collection)
+storage_context = StorageContext.from_defaults(vector_store=vector_store)
+
+# create your index
+index = VectorStoreIndex.from_documents(documents, storage_context=storage_context)
+
+def query(string, pdf):
 
     Settings.embed_model = resolve_embed_model("local:BAAI/bge-small-en-v1.5")
 
     Settings.llm = Ollama(model="mistral", request_timeout=30.0)
 
-    index = VectorStoreIndex.from_documents(
-        documents,
-    )
+    db = chromadb.PersistentClient(path="./chroma_db")
+    chroma_collection = db.get_or_create_collection("quickstart")
+    vector_store = ChromaVectorStore(chroma_collection=chroma_collection)
+    storage_context = StorageContext.from_defaults(vector_store=vector_store)
+    index = VectorStoreIndex.from_vector_store(vector_store, storage_context=storage_context)
 
+
+    text = PdfReader(pdf)
+    resume = text.pages[0].extract_text()
+    prompt = "With this resume as context for the answers you give,\n" + resume + "\n" + string
     query_engine = index.as_query_engine()
-    response = query_engine.query(string)
+    response = query_engine.query(prompt)
     return response

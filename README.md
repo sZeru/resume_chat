@@ -17,6 +17,8 @@ Tool for users to get feedback on their resume using a RAG assisted LLM.
 - python -m pip install pika --upgrade
 - npm install amqplib
 - pip install flask-socketio
+- pip install chromadb
+- pip install pypdf
 
 ### Install the following programs
 - Ollama (https://github.com/ollama/ollama). Afterwards, run 'ollama pull mistral` in the terminal
@@ -25,6 +27,7 @@ Tool for users to get feedback on their resume using a RAG assisted LLM.
 ### To run the program
 - open Ollama
 - start the RabbitMQ service
+- **If you haven't created the vector stores yet, run rag.py ONCE. If adding more data to retrieve information from, run rag.py once more.**
 - run app.py
 - run backend.py
 - Access the website on your local address (http://127.0.0.1:5000)
