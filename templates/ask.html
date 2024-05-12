@@ -59,6 +59,7 @@
 <body>
     <div id="chat-window">
         <div id="chat-messages"></div>
+        <input type="file" id="file-upload" accept=".pdf">
         <input type="text" id="user-message" onkeydown="handleKeyDown(event)" />
         <button onclick="sendMessage()">Send</button>
     </div>
@@ -73,18 +74,20 @@
         // function to send message from page
         function sendMessage() {
             var message = document.getElementById('user-message').value;
-            console.log('Message:', message);
-    
+            var fileInput = document.getElementById('file-upload');
+            var file = fileInput.files[0]; // Get the first file from the input element
+
+            var formData = new FormData();
+            formData.append('message', message);
+            formData.append('file', file);
+
             // Append user's message to chat window
             appendToChat('You: ' + message);
-    
-            // Send message to server-side endpoint
+
+            // Send message and file to server-side endpoint
             fetch('/send_message', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ message: message })
+                body: formData
             }).then(response => {
                 if (response.ok) {
                     console.log('Message sent successfully');
@@ -100,7 +103,7 @@
             }).catch(error => {
                 console.error('Error sending message:', error);
             });
-    
+
             // Clear input field
             document.getElementById('user-message').value = '';
         }
