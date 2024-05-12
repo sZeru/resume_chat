@@ -83,10 +83,8 @@ def send_message():
     # Send the message and file data to the RPC function
     response = send_rpc_request(message, file_data)
 
-    print("From send_message:")
-    print(response)
-    #return jsonify({'response': response})
-    return response
+    print(response.decode('utf-8'))
+    return jsonify({'response': response.decode('utf-8')})
 
 def send_rpc_request(message, file_data):
     response = client.call(message, file_data)

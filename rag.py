@@ -52,7 +52,7 @@ def query(string, pdf_data):
 
     text = PdfReader(pdf)
     resume = text.pages[0].extract_text()
-    prompt = "With this resume as context:\n" + resume + "\nPlease respond to the following query:\n" + string
+    prompt = "With this resume as context:\n" + resume + "\nPlease respond to the following query in detail:\n" + string
     query_engine = index.as_query_engine()
     response = query_engine.query(prompt)
     return response
