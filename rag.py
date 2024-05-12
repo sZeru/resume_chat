@@ -1,4 +1,5 @@
 import chromadb
+import io
 from llama_index.legacy import VectorStoreIndex, SimpleDirectoryReader, ServiceContext
 from llama_index.core.settings import Settings
 from llama_index.legacy.embeddings import resolve_embed_model
@@ -35,8 +36,7 @@ storage_context = StorageContext.from_defaults(vector_store=vector_store)
 # create your index
 index = VectorStoreIndex.from_documents(documents, storage_context=storage_context)
 
-def query(string, pdf):
-
+def query(string, pdf_data):
     Settings.embed_model = resolve_embed_model("local:BAAI/bge-small-en-v1.5")
 
     Settings.llm = Ollama(model="mistral", request_timeout=30.0)
@@ -47,10 +47,12 @@ def query(string, pdf):
     storage_context = StorageContext.from_defaults(vector_store=vector_store)
     index = VectorStoreIndex.from_vector_store(vector_store, storage_context=storage_context)
 
+    # convert to readable format
+    pdf = io.BytesIO(pdf_data)
 
     text = PdfReader(pdf)
     resume = text.pages[0].extract_text()
-    prompt = "With this resume as context for the answers you give,\n" + resume + "\n" + string
+    prompt = "With this resume as context:\n" + resume + "\nPlease respond to the following query in detail:\n" + string
     query_engine = index.as_query_engine()
     response = query_engine.query(prompt)
     return response
