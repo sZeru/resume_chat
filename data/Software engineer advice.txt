@@ -1,0 +1,61 @@
+1. Craft your summary or objective statement with care.
+
+    “Tell the reader that you know what you would be doing in this job, that you have the skills to complete these types of tasks on a day-to-day basis, and weave that into your summary”
+
+Lots of knowledge, but not a lot of experience?
+
+“Use the summary to your advantage. Convey that A) you have learned actual software engineering skills at your coding bootcamp, and B) that you’re aspiring to be a software engineer. You don’t have to make it sound like you’re already a pro,” says Matt Warzel, president of MJW Careers, who has been writing resumes for 15 years. “Focus on transferable skills. Translate what you learned and what you did in terms of project work that you can adapt to the real world. Try to make a quantifiable, impactful statement that will make employers hungry to learn more about you.”
+
+If you’re making a big shift in your career, use an objective statement at the top of your resume to show why you are looking for a completely different type of role.
+
+“Tell the reader that you know what you would be doing in this job, that you have the skills to complete these types of tasks on a day-to-day basis, and weave that into your summary,” says Warzel.
+2. Curate your job history.
+
+You don’t need to list every job you’ve ever had on your resume. Include only the jobs that are relevant, even if that means leaving a gap.
+
+That’s especially true if you’ve had five or 10 years of experience in the industry. Use your job history to show a career progression that demonstrates how you’ve grown into the role you’re applying for.
+
+“If your last role was, say, a junior front end developer and now you’re applying for a backend developer role or maybe a senior front end developer role, it really makes sense to show off your overall career path,” says Velizar Demirev, president of Cold Collar, a resume writing service.
+3. Emphasize your projects.
+
+Your resume should be broken down into four main sections: experience, education, skills, and projects. That last part is especially important for a software engineer resume.
+
+Even if you’re just starting out and you don’t have years of work experience behind you, you can still show off your skills by listing the projects you’ve completed. Work projects, personal projects, coding bootcamp projects; list anything that’s relevant to the job you’re looking for.
+
+“Employers love to see what you’ve been working on in your own time,” Demirev says. “Side projects show that you go the extra mile. You’re not only learning at school or at work for your own benefit, you’re also building something you enjoy.”
+
+Another pro tip: include metrics. If you helped build a website that scaled up from a few dozen visitors a day to hundreds, then you need to include that information. Anything that shows concrete results works to your advantage.
+4. Customize your resume for the job.
+
+If possible, tailor your resume to an individual job opening by including as many keywords as possible. The closer your resume matches the job description, the more it shows that you are a perfect fit for the job, which increases your chances of getting a callback.
+
+“Use the job description to find keywords that need to get weaved into your resume. You only have one or two pages to work with, so you really need to maximize what kind of content you’re putting in there,” says Warzel.
+
+While customizing your resume does usually pay off, you don’t want to go overboard.
+
+“There’s a point where you’ll find that you might not be able to include any more keywords. Read it out loud. If it doesn’t make sense, or doesn’t sound natural, then you shouldn’t keep stuffing in keywords,” says Demirev.
+5. Make sure your resume is ATS friendly.
+
+When you apply for a job, your resume often passes through an Applicant Tracking System before it ever reaches a human being. The ATS analyzes your resume and cover letter, then scores your application based on how well the keywords compare to the job description.
+
+Many large companies, especially Fortune 500 companies, spend significant money on tracking systems to pick through the tsunami of incoming applications.
+
+“Recently, Amazon had 30,000 new positions to fill. Everything from cleaning staff all the way up to developers, sales, and so on. They had, I think, more than 300,000 applicants apply to those jobs,” Velizar says.
+
+Out of all those applicants, the hiring manager may only look at the top 10 or 20 resumes that scored the highest according to the ATS. If you want your resume to be seen, make sure it’s in a standard format and matches the job description as closely as possible.
+
+Also, don’t include any non-text elements that could trip up the system. These systems are only smart enough to parse through text resumes, so if you use images, tables, or an unusual format, the ATS might relegate you to the bottom of the pile.
+6. Consider hiring a pro.
+
+If you’ve tried all of these other tips and still aren’t getting the results you want, it may be time to bring in a professional resume writer.
+
+“People often have a lot of great experience, but they just aren’t good at putting it down on paper. At the end of the day, your resume is really about marketing and personal branding,” Velizar says.
+
+Hiring a professional resume writer isn’t for everyone, but it can pay for itself. The longer it takes you to land a job, the greater the opportunity cost. If you’re trying to get a software engineer position that pays $100,000 a year and you’re still looking six months later, that’s six months of salary that you’ve lost. Something to keep in mind.
+Getting hired as a software engineer is not a matter of luck.
+
+All of these are tried-and-true techniques used by professional resume writers.
+
+Remember: use your summary or objective statement to position yourself for the job. Slant your work history to demonstrate your professional growth. Show off the projects you’re most proud of. Customize your resume to match the job description. And keep the text of your resume simple and straightforward, so that it doesn’t get rejected by the tracking system.
+
+Ultimately, it doesn’t matter how much competition is out there. Follow those crucial steps, and you’ll move your resume to the top of the pile, boosting your odds of getting hired for the job you really want.
