@@ -15,13 +15,21 @@
             color: #fff;
         }
         #chat-window {
-            width: 80%;
+            width: 50%;
             max-width: 600px;
             padding: 20px;
             background-color: #222;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            margin-right: 20px;
             text-align: left;
+        }
+        #pdf-viewer {
+            width: calc(40%-20px);
+            max-width: 460px;   /* base 480, reduced due to margin */
+            height: 80vh;
+            float: left;
+            box-sizing: border-box;
         }
         #chat-messages {
             height: 60vh; /* 60% of the viewport height */
@@ -54,6 +62,17 @@
         button:hover {
             background-color: #0056b3;
         }
+        .message {
+            margin-top: 0.5em; /* adjusts spacing between user and server text for clarity */
+        }
+        .dimmed {
+            opacity: 0.8;
+            pointer-events: none; 
+        }
+        #user-message[disabled] {
+            opacity: 0.8;
+            pointer-events: none;
+        }
     </style>
 </head>
 <body>
@@ -63,6 +82,8 @@
         <input type="text" id="user-message" onkeydown="handleKeyDown(event)" />
         <button onclick="sendMessage()">Send</button>
     </div>
+    <iframe id="pdf-viewer" width="100%" height="100%" style="display: none;"></iframe>
+    
     <script>
         function handleKeyDown(event) {
             if (event.keyCode === 13) {
@@ -84,6 +105,13 @@
             // Append user's message to chat window
             appendToChat('You: ' + message);
 
+            // Dim the chat window and messages
+            document.getElementById('chat-window').classList.add('dimmed');
+            document.getElementById('chat-messages').classList.add('dimmed');
+
+            // Disable the input field
+            document.getElementById('user-message').disabled = true;
+
             // Send message and file to server-side endpoint
             fetch('/send_message', {
                 method: 'POST',
@@ -102,16 +130,48 @@
                 appendToChat('Server: ' + data.response);
             }).catch(error => {
                 console.error('Error sending message:', error);
+            }).finally(() => {
+            // Remove dimming effect from chat window and messages
+            document.getElementById('chat-window').classList.remove('dimmed');
+            document.getElementById('chat-messages').classList.remove('dimmed');
+
+            // Enable the input field
+            document.getElementById('user-message').disabled = false;
             });
 
             // Clear input field
             document.getElementById('user-message').value = '';
         }
-    
+
+        function displayPDF() {
+            var fileInput = document.getElementById('file-upload');
+            var file = fileInput.files[0]; // Get the first file from the input element
+
+            var reader = new FileReader();
+
+            reader.onload = function(event) {
+                var pdfUrl = event.target.result;
+                var pdfViewer = document.getElementById('pdf-viewer');
+                pdfViewer.src = pdfUrl;
+                pdfViewer.style.display = 'block'; // Show the PDF viewer
+            };
+
+            // Read the uploaded file as a data URL
+            reader.readAsDataURL(file);
+        }
+
+        // Call displayPDF when a file is selected in the file input
+        document.getElementById('file-upload').addEventListener('change', displayPDF);
+
         function appendToChat(message) {
             var chatMessages = document.getElementById('chat-messages');
             var messageElement = document.createElement('div');
             messageElement.textContent = message;
+
+            // Adds spacing to text
+            messageElement.classList.add('message');
+
+            // Appends message
             chatMessages.appendChild(messageElement);
         }
     </script>
