@@ -9,6 +9,7 @@ Tool for users to get feedback on their resume using a RAG assisted LLM.
 - RabbitMQ
 - Erlang
 - Ollama
+- Set environment variable OPENAI_API_KEY to your OpenAI key
 
 ### Run these commands in your terminal first (May be different depending on your system)
 - pip install llama-index
@@ -27,7 +28,6 @@ Tool for users to get feedback on their resume using a RAG assisted LLM.
 ### To run the program
 - open Ollama
 - start the RabbitMQ service
-- **If you haven't created the vector stores yet, run rag.py ONCE. If adding more data to retrieve information from, run rag.py once more.**
 - run app.py
 - run backend.py
 - Access the website on your local address (http://127.0.0.1:5000)
